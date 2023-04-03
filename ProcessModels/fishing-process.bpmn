@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="d315f5d" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0" camunda:diagramRelationId="c3cc90df-728c-47c7-b36b-15028d5dcd51">
+  <bpmn:process id="FishingExample" name="Fishing Example" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:userTaskForm id="userTaskForm_2d0nq5d">{
+  "components": [
+    {
+      "text": "# Your fishing destination",
+      "type": "text",
+      "id": "Field_1dgy800"
+    },
+    {
+      "label": "Name of Fish",
+      "type": "textfield",
+      "id": "Field_04a0arg",
+      "key": "fish",
+      "disabled": true
+    },
+    {
+      "label": "Select A Place",
+      "type": "select",
+      "id": "Field_058pawq",
+      "key": "location",
+      "valuesKey": "fishingLocations"
+    }
+  ],
+  "schemaVersion": 7,
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "c8c2aa2"
+  },
+  "type": "default",
+  "id": "Form_417bd5b0-b248-4016-8d10-1907433da3b2",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.2.0"
+}</zeebe:userTaskForm>
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="StartEvent_1" name="So you want to catch a fish?" zeebe:modelerTemplate="io.camunda.connectors.webhook.WebhookConnector.v1" zeebe:modelerTemplateVersion="1" zeebe:modelerTemplateIcon="data:image/svg+xml,%3Csvg id=&#39;icon&#39; xmlns=&#39;http://www.w3.org/2000/svg&#39; width=&#39;18&#39; height=&#39;18&#39; viewBox=&#39;0 0 32 32&#39;%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: none; %7D %3C/style%3E%3C/defs%3E%3Cpath d=&#39;M24,26a3,3,0,1,0-2.8164-4H13v1a5,5,0,1,1-5-5V16a7,7,0,1,0,6.9287,8h6.2549A2.9914,2.9914,0,0,0,24,26Z&#39;/%3E%3Cpath d=&#39;M24,16a7.024,7.024,0,0,0-2.57.4873l-3.1656-5.5395a3.0469,3.0469,0,1,0-1.7326.9985l4.1189,7.2085.8686-.4976a5.0006,5.0006,0,1,1-1.851,6.8418L17.937,26.501A7.0005,7.0005,0,1,0,24,16Z&#39;/%3E%3Cpath d=&#39;M8.532,20.0537a3.03,3.03,0,1,0,1.7326.9985C11.74,18.47,13.86,14.7607,13.89,14.708l.4976-.8682-.8677-.497a5,5,0,1,1,6.812-1.8438l1.7315,1.002a7.0008,7.0008,0,1,0-10.3462,2.0356c-.457.7427-1.1021,1.8716-2.0737,3.5728Z&#39;/%3E%3Crect id=&#39;_Transparent_Rectangle_&#39; data-name=&#39;&#38;lt;Transparent Rectangle&#38;gt;&#39; class=&#39;cls-1&#39; width=&#39;32&#39; height=&#39;32&#39;/%3E%3C/svg%3E">
+      <bpmn:extensionElements>
+        <zeebe:properties>
+          <zeebe:property name="inbound.type" value="io.camunda:webhook:1" />
+          <zeebe:property name="inbound.subtype" value="ConfigurableInboundWebhook" />
+          <zeebe:property name="inbound.context" value="FishingSpot" />
+          <zeebe:property name="inbound.shouldValidateHmac" value="disabled" />
+          <zeebe:property name="inbound.activationCondition" value="=(&#10;  request.body.status = &#34;Fish Person&#34;&#10;)" />
+          <zeebe:property name="inbound.variableMapping" value="={&#10;  fish : request.body.fish&#10;}" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_06pzdtb</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1u1iv4f">
+        <bpmn:targetRef>DataObjectReference_0shdqar</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_06pzdtb" sourceRef="StartEvent_1" targetRef="Activity_0sb2d31" />
+    <bpmn:businessRuleTask id="Activity_0sb2d31" name="Decide where to fish">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="WhereToFish" resultVariable="fishingLocations" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_06pzdtb</bpmn:incoming>
+      <bpmn:outgoing>Flow_1sj1sha</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_1sj1sha" sourceRef="Activity_0sb2d31" targetRef="Activity_0x0mptx" />
+    <bpmn:userTask id="Activity_0x0mptx" name="Select potential location">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:userTaskForm_2d0nq5d" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1sj1sha</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sri5cr</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0gat5uy" name="Start Fishing">
+      <bpmn:incoming>Flow_0sri5cr</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0sri5cr" sourceRef="Activity_0x0mptx" targetRef="Event_0gat5uy" />
+    <bpmn:dataObjectReference id="DataObjectReference_0shdqar" name="Name of fish" dataObjectRef="DataObject_02tedkw" />
+    <bpmn:dataObject id="DataObject_02tedkw" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="FishingExample">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="153" y="275" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0omwglw_di" bpmnElement="Activity_0sb2d31">
+        <dc:Bounds x="260" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1409ul4_di" bpmnElement="Activity_0x0mptx">
+        <dc:Bounds x="420" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0gat5uy_di" bpmnElement="Event_0gat5uy">
+        <dc:Bounds x="592" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="580" y="275" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0shdqar_di" bpmnElement="DataObjectReference_0shdqar">
+        <dc:Bounds x="172" y="105" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="159" y="83" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1u1iv4f_di" bpmnElement="DataOutputAssociation_1u1iv4f">
+        <di:waypoint x="190" y="232" />
+        <di:waypoint x="190" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06pzdtb_di" bpmnElement="Flow_06pzdtb">
+        <di:waypoint x="208" y="250" />
+        <di:waypoint x="260" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sj1sha_di" bpmnElement="Flow_1sj1sha">
+        <di:waypoint x="360" y="250" />
+        <di:waypoint x="420" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0sri5cr_di" bpmnElement="Flow_0sri5cr">
+        <di:waypoint x="520" y="250" />
+        <di:waypoint x="592" y="250" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

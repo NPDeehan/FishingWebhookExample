@@ -1,0 +1,32 @@
+{
+  "components": [
+    {
+      "text": "# Your fishing destination",
+      "type": "text",
+      "id": "Field_1dgy800"
+    },
+    {
+      "label": "Name of Fish",
+      "type": "textfield",
+      "id": "Field_04a0arg",
+      "key": "fish",
+      "disabled": true
+    },
+    {
+      "label": "Select A Place",
+      "type": "select",
+      "id": "Field_058pawq",
+      "key": "location",
+      "valuesKey": "fishingLocations"
+    }
+  ],
+  "schemaVersion": 7,
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "c8c2aa2"
+  },
+  "type": "default",
+  "id": "Form_417bd5b0-b248-4016-8d10-1907433da3b2",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.2.0"
+}

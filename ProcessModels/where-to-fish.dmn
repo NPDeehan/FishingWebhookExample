@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_13kb8ma" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="cc4361c" camunda:diagramRelationId="59b3ed67-bea9-4843-9dcd-e8827f6e8004" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0">
+  <decision id="WhereToFish" name="Choose Where to Fish">
+    <informationRequirement id="InformationRequirement_1yi4wlk">
+      <requiredInput href="#InputData_0f3s0bk" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_04g4eyf" hitPolicy="COLLECT">
+      <input id="Input_1" label="Fish Name">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>fish</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Location" name="location" typeRef="string" />
+      <rule id="DecisionRule_16x8t6r">
+        <inputEntry id="UnaryTests_1lvh9xo">
+          <text>"Trout", "Salmon", "Bass", "Catfish", "Walleye", "Pike", "Muskellunge", "Perch", "Bluegill", "Crappie"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0r69xxr">
+          <text>"River"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18hsh71">
+        <inputEntry id="UnaryTests_0rtmepi">
+          <text>"Tuna", "Salmon", "Cod", "Haddock", "Herring", "Mackerel", "Sardine", "Trout", "Swordfish", "Barracuda"
+</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16y0if5">
+          <text>"Sea"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yb1rc6">
+        <inputEntry id="UnaryTests_1gl6x9g">
+          <text>"Walleye", "Pike", "Perch", "Largemouth Bass", "Smallmouth Bass", "Crappie", "Bluegill", "Trout", "Catfish", "Sunfish"
+</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1k5agqn">
+          <text>"Lake"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1aas7mr">
+        <inputEntry id="UnaryTests_0rpuqja">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_004u8sz">
+          <text>"Supermarket"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0f3s0bk" name="Name of fish" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="WhereToFish">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_00cpfx3" dmnElementRef="InputData_0f3s0bk">
+        <dc:Bounds height="45" width="125" x="187" y="267" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0pmeh7k" dmnElementRef="InformationRequirement_1yi4wlk">
+        <di:waypoint x="250" y="267" />
+        <di:waypoint x="250" y="180" />
+        <di:waypoint x="250" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
